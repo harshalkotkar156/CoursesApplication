@@ -1,6 +1,7 @@
-<!-- # Getting Started with Create React App
+<h1>CoursesApplication using react Framework </h1>
+<!-- # Getting Started with Create React App-->
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!--This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
