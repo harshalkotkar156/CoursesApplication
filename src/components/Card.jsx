@@ -1,25 +1,28 @@
 import React from "react";
 
 import {FcLike} from "react-icons/fc";
-function Card({course})
+
+function Card(props)
 {
+    let course = props.course;
     return (
         <div>
-
-            <div> 
+            <div>
                 <img src={course.image.url} alt="" />
 
-                <div>
-                    <button > <FcLike fontSize="1.75rem">  </FcLike></button>
 
-                </div>
+            </div>
+
+            <div>
+                <button>
+                    <FcLike></FcLike>
+                </button>
             </div>
 
             <div>
                 <p>{course.title}</p>
                 <p>{course.description}</p>
             </div>
-
         </div>
     )
 }

@@ -2,15 +2,15 @@ import React from "react";
 import Card from "./Card";
 
 
-function Cards({courses})
+function Cards(props)
 {
+    let courses = props.courses;
     
-    let allCourses=[];
+    function getCourses(){
 
-    const getCourses = () =>  {
-
-        console.log("Printing coursess ");
-        console.log(courses);
+        // console.log("Printing coursess ");
+        // console.log(courses);
+        let allCourses=[];
         Object.values(courses).forEach( (courseCategory) =>{
             courseCategory.forEach((course) =>{
                 allCourses.push(course);
@@ -19,17 +19,17 @@ function Cards({courses})
 
         return allCourses;
     }
-
-    
     return(
         <div>
             {
-                getCourses().map( (course) => {
-                   return  <Card course={course}/>
-                })
+                getCourses().map( (course) => (
+                    <Card key={course.id} course={course} />
+                ))
             }
         </div>
     )
+    
+   
 
 }
 

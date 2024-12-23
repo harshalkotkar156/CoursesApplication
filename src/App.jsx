@@ -1,14 +1,13 @@
-
 import './App.css';
-import Navbar from './components/Navbar';
 import { useEffect, useState } from 'react';
 // import Filter from './components/Filter';
 import {apiUrl,filterData} from './data' ;
-import Cards from './components/Cards';
-
-
-import Filter from './components/Filter';
 import { toast } from 'react-toastify';
+
+import Navbar from './components/Navbar';
+import Filter from './components/Filter';
+import Cards from './components/Cards';
+import Spinner from './components/Spinner';
 
 
 
@@ -17,60 +16,50 @@ function App() {
 
 
   
-  const [courses,setCourses] = useState(null);
+  const [courses,setCourses] = useState([]);
+  const [loading ,setLoading] = useState(true);
+  async function fetchData() {
+    setLoading(true);
+    try {
 
-  useEffect( () => {
+        let res = await fetch(apiUrl);
+        let op = await res.json();
 
-    async function fetchData() {
-        try {
-
-            const res = await fetch(apiUrl);
-            const op = await res.json();
-
-            //saving the data
-            // console.log("heu " + op);
-            setCourses(op.data);
-        } catch (error) {
-          
-          toast.error("Error Occuring");
-          console.log("Not Fetching!");
-        }
-
-
-
+        //saving the data
+        console.log("heu " + op);
+        console.log("Data is ; ",op.data);
+        setCourses(op.data);
+    } catch (error) {
+      
+      toast.error("Error Occuring");
+      console.log("Not Fetching!");
     }
+    setLoading(false);
+
+  }
+  useEffect( () => {
     fetchData();
 
   },[])
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       const res = await fetch(apiUrl);
-  //       const op = await res.json();
-  
-  //       // Saving the data
-  //       console.log("Fetched Data:", op);
-  //       setCourses(op.data);
-
-  //     } catch (error) {
-  //       toast.error("Error Occurring");
-  //       console.log("Error Fetching Data:", error);
-  //     }
-  //   }
-  
-  //   fetchData();
-  // }, []); // Empty array ensures this runs only once
+ 
   
 
   return (
-    <div>
+    <div  className='min-h-screen flex flex-col'>
+      
+      <div >
+        <Navbar/>
+      </div>
 
-      <Navbar/>
+      <div>
+        <Filter filterData={filterData} />
+      </div>
 
-      <Filter filterData={filterData} />
-
-      <Cards courses={courses} ></Cards>
-
+      <div>
+        {
+          loading ? (<Spinner/>) : (<Cards courses={courses}/>)
+        }
+      </div>
     </div>
   );
 }

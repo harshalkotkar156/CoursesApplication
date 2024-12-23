@@ -3,10 +3,10 @@ function Navbar()
 {
     return(
         <div>
-            <h1>Top Courses</h1>
-            <h2>Hllo world
-                
-            </h2>
+            <nav style={{ backgroundColor: "#22223b" }} className='py-4'>
+
+                <h1 className='text-white font-extrabold text-center text-3xl' > Top Courses</h1>
+            </nav>
         </div>
     )
 
