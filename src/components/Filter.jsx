@@ -1,0 +1,17 @@
+import React from "react";
+
+function Filter({ filterData }) {
+    return (
+        <div>
+            {filterData.map((data) => {
+                return <button key={data.id}>{data.title}</button>; // Use "id" instead of "iD"
+            })}
+        </div>
+    );
+}
+
+export default Filter;
+
+
+
+
