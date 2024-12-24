@@ -4,9 +4,9 @@ import './Spinner.css';
 
 function Spinner() {
     return (
-        <div>
+        <div className="flex flex-col items-center space-y-2">
             <div className="spinner"></div>
-            <p>loading...</p>
+            <p className="text-lg font-semibold">Loading...</p>    
         </div>
     );
 }

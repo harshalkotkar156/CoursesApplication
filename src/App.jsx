@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 // import Filter from './components/Filter';
 import {apiUrl,filterData} from './data' ;
 import { toast } from 'react-toastify';
+import ShowError from './components/ShowError';
 
 import Navbar from './components/Navbar';
 import Filter from './components/Filter';
@@ -18,6 +19,9 @@ function App() {
   
   const [courses,setCourses] = useState([]);
   const [loading ,setLoading] = useState(true);
+
+  const [category,setCategory] = useState(filterData[0].title);
+
   async function fetchData() {
     setLoading(true);
     try {
@@ -45,20 +49,25 @@ function App() {
   
 
   return (
-    <div  className='min-h-screen flex flex-col'>
+    <div  className='min-h-screen flex flex-col bg-[#4a4e69]'>
       
       <div >
         <Navbar/>
       </div>
 
-      <div>
-        <Filter filterData={filterData} />
-      </div>
+      <div className='bg-[#4a4e69]'>
+        <div>
+          <Filter filterData={filterData} setCategory={setCategory} category={category} />
+        </div>
 
-      <div>
-        {
-          loading ? (<Spinner/>) : (<Cards courses={courses}/>)
-        }
+
+        <div className='w-11/12 max-w-[1200px] mx-auto flex justify-center flex-wrap  items-center min-h-[50vh]' >
+            {
+              loading ? (<Spinner/>) : (<Cards courses={courses} category={category} />)
+            }
+          </div>
+        
+
       </div>
     </div>
   );
